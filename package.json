@@ -1,0 +1,12 @@
+{
+  "name": "coast-and-country",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Coast & Country Homes website — Pure HTML/CSS/JS",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "build": "node build.js"
+  }
+}
