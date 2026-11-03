@@ -120,8 +120,8 @@
 }
 
 .hero__title {
-  font-size: clamp(4.25rem, 19vw, 9rem);
-  line-height: 0.82;
+  font-size: clamp(3.25rem, 15vw, 9rem);
+  line-height: 0.85;
   letter-spacing: -0.02em;
 }
 
@@ -463,93 +463,83 @@
 .featured__track {
   position: relative;
   width: 100%;
-  height: clamp(380px, 54vh, 560px);
+  height: clamp(380px, 54vh, 580px);
   overflow: hidden;
   border-radius: var(--radius-card);
+  user-select: none;
+  cursor: grab;
 }
 
-/*
- * One photo on the conveyor. Its `data-slot` decides where it sits and how large it is.
- */
-.featured__frame {
-  position: absolute;
-  top: 50%;
-  overflow: hidden;
-  border-radius: 12px;
-  transform: translateY(-50%);
-  transition-property: left, width, height, opacity, transform;
-  transition-duration: 0.55s;
-  transition-timing-function: var(--ease-out-soft);
-  will-change: left, width, height, opacity;
+.featured__track:active {
+  cursor: grabbing;
 }
 
-.featured__frame[data-slot="-2"] {
-  left: -85%;
-  width: 76%;
-  height: 82%;
-  opacity: 0.15;
-}
-
-.featured__frame[data-slot="-1"] {
-  left: -66%;
-  width: 76%;
-  height: 90%;
-  opacity: 0.5;
-  cursor: pointer;
-}
-
-.featured__frame[data-slot="0"] {
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 78%;
+.featured__strip {
+  display: flex;
+  align-items: center;
   height: 100%;
-  opacity: 1;
-  z-index: 2;
-  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
+  width: max-content;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
-.featured__frame[data-slot="1"] {
-  left: 90%;
-  width: 76%;
-  height: 90%;
+.featured__slide {
+  flex: 0 0 clamp(290px, 34vw, 440px);
+  height: 100%;
+  padding: 0 0.85rem;
   opacity: 0.5;
+  transform: scale(0.9);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.55s ease;
+  will-change: transform, opacity;
   cursor: pointer;
 }
 
-.featured__frame[data-slot="2"] {
-  left: 170%;
-  width: 76%;
-  height: 82%;
-  opacity: 0.15;
+@media (width < 48rem) {
+  .featured__slide {
+    flex: 0 0 80vw;
+    max-width: 380px;
+    padding: 0 0.5rem;
+  }
 }
 
-.featured__frame img {
+.featured__slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  cursor: default;
+}
+
+.featured__card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.55s ease;
+}
+
+.featured__slide.is-active .featured__card {
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
+}
+
+.featured__card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.6s var(--ease-out-soft);
+  transition: transform 0.7s var(--ease-out-soft);
 }
 
-.featured__frame:hover img {
+.featured__slide:hover .featured__card-img {
   transform: scale(1.03);
 }
 
-.featured__frame-link,
-.featured__frame-step {
+.featured__card-link {
   position: absolute;
   inset: 0;
-  display: none;
-}
-
-.featured__frame[data-slot="0"] .featured__frame-link {
   display: block;
 }
 
-.featured__frame[data-slot="-1"] .featured__frame-step,
-.featured__frame[data-slot="1"] .featured__frame-step {
-  display: block;
-  cursor: pointer;
-  z-index: 5;
+.featured__slide:not(.is-active) .featured__card-link {
+  pointer-events: none;
 }
 
 /*
@@ -567,7 +557,7 @@
   z-index: 10;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5.8vw, 5.5rem);
+  font-size: clamp(2rem, 5.5vw, 5.5rem);
   font-weight: 400;
   text-transform: uppercase;
   line-height: 0.95;
@@ -650,49 +640,6 @@
 
   .featured__track {
     height: clamp(440px, 56vh, 600px);
-  }
-
-  /* Center card: centered, width ~35vw, max-width 460px */
-  .featured__frame[data-slot="0"] {
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: clamp(320px, 35vw, 460px);
-    height: 100%;
-    opacity: 1;
-    z-index: 2;
-    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
-  }
-
-  /* Left card peeks in */
-  .featured__frame[data-slot="-1"] {
-    left: calc(50% - (clamp(320px, 35vw, 460px) / 2) - clamp(260px, 28vw, 380px) - 2rem);
-    transform: translateY(-50%);
-    width: clamp(260px, 28vw, 380px);
-    height: 88%;
-    opacity: 0.55;
-    z-index: 1;
-  }
-
-  /* Right card peeks in */
-  .featured__frame[data-slot="1"] {
-    left: calc(50% + (clamp(320px, 35vw, 460px) / 2) + 2rem);
-    transform: translateY(-50%);
-    width: clamp(260px, 28vw, 380px);
-    height: 88%;
-    opacity: 0.55;
-    z-index: 1;
-  }
-
-  .featured__frame[data-slot="-2"] {
-    left: -20%;
-    width: 20%;
-    opacity: 0.15;
-  }
-
-  .featured__frame[data-slot="2"] {
-    left: 100%;
-    width: 20%;
-    opacity: 0.15;
   }
 
   .featured__title {

@@ -16,8 +16,10 @@ export function initSiteHeader() {
     frame = 0;
     const y = window.scrollY;
     header.classList.toggle("is-solid", y > SOLID_AFTER_PX);
-    header.classList.toggle("is-hidden", y > lastY && y > window.innerHeight * 0.5);
-    lastY = y;
+    if (Math.abs(y - lastY) > 16) {
+      header.classList.toggle("is-hidden", y > lastY && y > 350);
+      lastY = y;
+    }
   };
 
   window.addEventListener(

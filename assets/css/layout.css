@@ -348,23 +348,16 @@
   }
 }
 
-/* Scroll stack ------------------------------------------------------------- */
+/* Section Cards ----------------------------------------------------------- */
 
 /*
- * One "slide" in the scroll stack: the charcoal page inset with a rounded card inside.
- * stack-sections.js pins each slide by its bottom edge; as the next slide covers it, the
- * card shrinks and dims through `--cover`.
+ * One framed section: the charcoal page inset with a sleek rounded card inside.
+ * Uses native GPU-composited scrolling for fluid 120Hz/60Hz momentum scrolling.
  */
 .slide {
   position: relative;
   padding: var(--frame);
   background-color: var(--color-charcoal);
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .slide {
-    position: sticky;
-  }
 }
 
 .slide__card {
@@ -373,19 +366,6 @@
   overflow: hidden;
   border-radius: var(--radius-card);
   background-color: var(--color-night);
-  transform: scale(calc(1 - var(--cover, 0) * 0.06));
-  transform-origin: 50% 100%;
-  will-change: transform;
-}
-
-.slide__card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 10;
-  background-color: #000;
-  opacity: calc(var(--cover, 0) * 0.7);
-  pointer-events: none;
 }
 
 /* Footer ------------------------------------------------------------------- */
