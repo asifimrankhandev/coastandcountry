@@ -53,6 +53,24 @@
   height: var(--header-height);
 }
 
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.3s var(--ease-out-soft);
+}
+
+.brand-logo:hover {
+  opacity: 0.85;
+}
+
+.brand-logo__img {
+  height: clamp(1.75rem, 3.5vw, 2.25rem);
+  width: auto;
+  max-width: 12rem;
+  object-fit: contain;
+  display: block;
+}
+
 .site-header__phones {
   display: none;
   align-items: center;
