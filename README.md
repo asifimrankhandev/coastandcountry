@@ -67,9 +67,11 @@ npx -p typescript tsc --noEmit --allowJs --checkJs --strict --target es2022 \
 
 ## Property data
 
-Listings come from the existing site's public API. When it fails or is slow (requests time out
-after 8 seconds), the page says so and links to all properties. It never shows placeholder
-homes or figures.
+Listings come from the existing site's public API, which often takes 10–30 seconds to respond.
+The last good featured homes are kept in the visitor's browser for a week, so returning visitors
+see them at once while a fresh copy loads in the background. When a request fails (they time out
+after 30 seconds) and nothing is saved, the page says so and links to all properties. It never
+shows placeholder homes or figures.
 
 ## Deployment
 
