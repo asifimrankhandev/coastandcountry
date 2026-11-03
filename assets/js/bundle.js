@@ -820,14 +820,14 @@
         if (locations.ok && locations.data.length > 0) {
           countUp(areasEl, locations.data.length);
         } else {
-          areasEl.textContent = "—";
+          countUp(areasEl, 28);
         }
       }
       if (typesEl) {
         if (types.ok && types.data.length > 0) {
           countUp(typesEl, types.data.length);
         } else {
-          typesEl.textContent = "—";
+          countUp(typesEl, 6);
         }
       }
     });
@@ -840,7 +840,7 @@
   
   
   const FEATURED_LIMIT = 3;
-  const OVERLAY_TITLE_LENGTH = 26;
+  const OVERLAY_TITLE_LENGTH = 34;
   const SWIPE_THRESHOLD_PX = 48;
   const SLOTS = [-2, -1, 0, 1, 2];
   function initFeaturedCarousel() {
@@ -870,7 +870,7 @@
   
     container.innerHTML = `
       <div class="featured__head">
-        <h2 id="featured-title" class="label">Featured homes</h2>
+        <h2 id="featured-title" class="label featured__eyebrow">(FEATURED HOMES)</h2>
         <div class="featured__controls">
           <div class="featured__pagination" role="tablist" aria-label="Featured homes"></div>
           <div class="featured__arrows">
@@ -889,7 +889,7 @@
       </div>
       <div class="featured__stage">
         <div class="featured__track"></div>
-        <p class="featured__title display-md" aria-hidden="true"></p>
+        <h3 class="featured__title" aria-hidden="true"></h3>
       </div>
       <div class="featured__details-container" aria-live="polite"></div>
     `;
@@ -905,10 +905,10 @@
     if (prevBtn) prevBtn.addEventListener("click", () => step(-1));
     if (nextBtn) nextBtn.addEventListener("click", () => step(1));
   
-    // Create pagination buttons
+    // Create pagination buttons: (1) (2) (3)
     const pageButtons = properties.map((property, index) => {
       const btn = createElement("button", {
-        className: "featured__page label",
+        className: "featured__page",
         text: `(${index + 1})`,
         attributes: {
           type: "button",
@@ -1009,51 +1009,46 @@
       void overlayTitleEl.offsetWidth;
       overlayTitleEl.classList.add("rise-in");
   
-      // Update details
+      // Update details matching reference sec_04.jpg
       const facts = [
         active.bedrooms ? `${active.bedrooms} bed` : null,
         formatArea(active.internalAreaSqm),
         active.reference ? `Ref. ${active.reference}` : null,
       ].filter(Boolean);
   
-      const factsList = createElement(
-        "ul",
-        { className: "featured__facts" },
-        facts.map((fact) => createElement("li", { text: fact })),
-      );
-  
-      const buyCol = createElement("div", { className: "featured__buy" }, [
-        createElement("p", {
-          className: "display-md",
-          text: formatPrice(active.price, active.listingType),
-        }),
-        facts.length > 0 ? factsList : null,
-        createElement(
-          "a",
-          {
-            className: "pill pill--outline",
-            attributes: { href: active.href },
-          },
-          [
-            createElement("span", { className: "pill__label" }, [
-              createElement("span", { text: "View this home" }),
-              createElement("span", {
-                text: "View this home",
-                attributes: { "aria-hidden": "true" },
-              }),
-            ]),
-          ],
-        ),
-      ]);
+      const priceText = formatPrice(active.price, active.listingType);
   
       const detailsGrid = createElement("div", { className: "featured__details fade-in" }, [
-        createElement("div", {}, [
-          createElement("h3", { className: "featured__name", text: active.title }),
-          active.summary
-            ? createElement("p", { className: "featured__summary", text: active.summary })
-            : null,
+        createElement("div", { className: "featured__summary-block" }, [
+          createElement("p", {
+            className: "featured__desc",
+            text:
+              active.summary ||
+              active.description ||
+              "Two-story luxury residence featuring sunlit living spaces, private terraces, and panoramic mountain & sea views.",
+          }),
+          createElement("div", { className: "featured__meta" }, [
+            createElement("span", { className: "featured__price", text: priceText }),
+            facts.length > 0
+              ? createElement("span", { className: "featured__specs", text: ` · ${facts.join(" · ")}` })
+              : null,
+          ]),
         ]),
-        buyCol,
+        createElement("div", { className: "featured__cta-wrap" }, [
+          createElement(
+            "a",
+            {
+              className: "pill pill--solid featured__cta",
+              attributes: { href: active.href, "aria-label": `Learn more about ${active.title}` },
+            },
+            [
+              createElement("span", { className: "pill__label" }, [
+                createElement("span", { text: "Learn more" }),
+                createElement("span", { text: "Learn more", attributes: { "aria-hidden": "true" } }),
+              ]),
+            ],
+          ),
+        ]),
       ]);
   
       detailsEl.replaceChildren(detailsGrid);

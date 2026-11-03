@@ -295,15 +295,25 @@
   font-size: var(--text-figure);
   font-variant-numeric: tabular-nums;
   line-height: 0.85;
+  color: var(--color-ivory);
+}
+
+.figures__suffix {
+  font-size: 0.38em;
+  font-style: italic;
+  font-family: var(--font-display);
+  vertical-align: top;
+  margin-left: 0.25rem;
+  color: var(--color-sand);
 }
 
 .figures__label {
-  max-width: 14rem;
+  max-width: 15rem;
   margin-top: 1rem;
   color: var(--color-stone);
   font-size: 0.9375rem;
   line-height: 1.5;
-  font-weight: 450;
+  font-weight: 400;
 }
 
 @media (width >= 40rem) {
@@ -314,56 +324,61 @@
 
 @media (width >= 64rem) {
   .figures {
-    padding-top: 8rem;
-    padding-bottom: 8rem;
+    padding-top: 9rem;
+    padding-bottom: 9rem;
   }
 
-  /* Staggered placement across the grid, echoing a printed spread. */
+  /* Staggered placement across the grid matching ELYSE reference spread. */
   .figures__list {
     grid-template-columns: repeat(12, minmax(0, 1fr));
-    row-gap: 8vh;
-    margin-top: 1.5rem;
+    grid-template-rows: auto auto auto;
+    row-gap: 9vh;
+    margin-top: 2rem;
   }
 
+  /* Left column item (vertically centered) */
   .figures__item:nth-child(1) {
     grid-area: 2 / 1 / 3 / span 4;
   }
 
+  /* Center top item */
   .figures__item:nth-child(2) {
-    grid-area: 1 / 5 / 2 / span 3;
+    grid-area: 1 / 5 / 2 / span 4;
   }
 
+  /* Center bottom item */
   .figures__item:nth-child(3) {
-    grid-area: 1 / 9 / 2 / span 3;
+    grid-area: 3 / 5 / 4 / span 4;
   }
 
+  /* Right top item */
   .figures__item:nth-child(4) {
-    grid-area: 3 / 4 / 4 / span 4;
+    grid-area: 1 / 9 / 2 / span 4;
   }
 }
 
 /* Featured homes ----------------------------------------------------------- */
 
 .featured {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .featured__head {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
-.featured__head h2 {
+.featured__eyebrow {
   white-space: nowrap;
 }
 
 .featured__controls {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1.25rem;
 }
 
 .featured__arrows {
@@ -387,15 +402,13 @@
 }
 
 .featured__arrow-btn svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  transition: transform 0.25s var(--ease-out-soft);
+  width: 1rem;
+  height: 1rem;
 }
 
 .featured__arrow-btn:hover {
-  border-color: var(--color-sand);
-  color: var(--color-sand);
-  background-color: rgb(var(--color-ivory-rgb) / 0.08);
+  border-color: var(--color-ivory);
+  background-color: rgb(var(--color-ivory-rgb) / 0.1);
 }
 
 .featured__arrow-btn:active {
@@ -406,6 +419,7 @@
   display: flex;
   flex-shrink: 0;
   align-items: center;
+  gap: 0.35rem;
 }
 
 .featured__page {
@@ -413,21 +427,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.25rem;
-  height: 2.5rem;
+  padding: 0.25rem 0.5rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.0625rem;
+  color: rgb(var(--color-ivory-rgb) / 0.4);
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .featured__page:hover,
 .featured__page[aria-current="true"] {
-  color: var(--color-ivory);
+  color: #ffffff;
 }
 
 /* Fills while the slide is shown; reaching the end advances the carousel. */
 .featured__progress {
   position: absolute;
   right: 0.5rem;
-  bottom: 0.375rem;
+  bottom: 0.125rem;
   left: 0.5rem;
   height: 1px;
   background-color: var(--color-sand);
@@ -444,23 +462,21 @@
 
 .featured__track {
   position: relative;
-  aspect-ratio: 4 / 5;
+  width: 100%;
+  height: clamp(380px, 54vh, 560px);
   overflow: hidden;
   border-radius: var(--radius-card);
 }
 
 /*
- * One photo on the conveyor. Its `data-slot` (relative to the home in focus) decides where
- * it sits and how large it is; changing the slot glides it to its next place.
+ * One photo on the conveyor. Its `data-slot` decides where it sits and how large it is.
  */
 .featured__frame {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
   overflow: hidden;
-  border-radius: calc(var(--radius-card) - 4px);
+  border-radius: 12px;
+  transform: translateY(-50%);
   transition-property: left, width, height, opacity, transform;
   transition-duration: 0.55s;
   transition-timing-function: var(--ease-out-soft);
@@ -470,48 +486,52 @@
 .featured__frame[data-slot="-2"] {
   left: -85%;
   width: 76%;
-  height: 85%;
-  opacity: 0.35;
+  height: 82%;
+  opacity: 0.15;
 }
 
 .featured__frame[data-slot="-1"] {
-  left: -68%;
+  left: -66%;
   width: 76%;
   height: 90%;
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .featured__frame[data-slot="0"] {
-  left: 12%;
-  width: 76%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78%;
   height: 100%;
   opacity: 1;
   z-index: 2;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.7);
 }
 
 .featured__frame[data-slot="1"] {
-  left: 92%;
+  left: 90%;
   width: 76%;
   height: 90%;
-  opacity: 0.55;
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .featured__frame[data-slot="2"] {
-  left: 172%;
+  left: 170%;
   width: 76%;
-  height: 85%;
-  opacity: 0.35;
+  height: 82%;
+  opacity: 0.15;
 }
 
 .featured__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.6s var(--ease-out-soft);
 }
 
 .featured__frame:hover img {
-  transform: scale(1.04);
+  transform: scale(1.03);
 }
 
 .featured__frame-link,
@@ -532,186 +552,152 @@
   z-index: 5;
 }
 
-/* The large overlaid title is decorative; the full listing title is in the details. */
+/*
+ * OVERLAID TITLE: Matches reference video (sec_04.jpg, sec_09.jpg).
+ * Huge serif display typography centered across the upper half of the active property.
+ */
 .featured__title {
-  position: relative;
-  z-index: 3;
-  margin-top: 1.5rem;
+  position: absolute;
+  top: 22%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 980px;
+  text-align: center;
+  z-index: 10;
+  margin: 0;
   font-family: var(--font-display);
-  font-size: var(--text-display-md);
+  font-size: clamp(2.25rem, 5.8vw, 5.5rem);
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
-  text-shadow: 0 2px 24px rgb(0 0 0 / 0.6);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  color: #ffffff;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.75);
   pointer-events: none;
 }
 
+/*
+ * Details bar directly beneath the center card (matching sec_04.jpg).
+ */
 .featured__details {
-  display: grid;
-  gap: 2rem;
-  max-width: 56rem;
-  margin: 2rem auto 0;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgb(var(--color-ivory-rgb) / 0.15);
-}
-
-.featured__name {
-  font-family: var(--font-sans);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-}
-
-.featured__summary {
-  display: -webkit-box;
-  max-width: 28rem;
-  margin-top: 0.75rem;
-  overflow: hidden;
-  color: var(--color-stone);
-  font-size: 0.875rem;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-
-.featured__buy {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 52rem;
+  margin: 1.75rem auto 0;
 }
 
-.featured__facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-  color: var(--color-stone);
-  font-size: 0.6875rem;
+.featured__summary-block {
+  flex: 1;
+}
+
+.featured__desc {
+  color: rgb(var(--color-ivory-rgb) / 0.88);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  max-width: 32rem;
+}
+
+.featured__meta {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.featured__price {
+  font-weight: 600;
+  color: var(--color-sand);
+}
+
+.featured__specs {
+  color: var(--color-stone);
+}
+
+.featured__cta {
+  align-self: flex-start;
 }
 
 .featured__placeholder {
   margin-top: 2.5rem;
-  aspect-ratio: 4 / 5;
+  height: clamp(380px, 54vh, 560px);
   background-color: var(--color-night-raised);
+  border-radius: var(--radius-card);
   animation: pulse 2s ease-in-out infinite;
 }
 
-.featured__status {
-  margin-top: 2.5rem;
-  color: var(--color-stone);
-}
-
 @media (width >= 40rem) {
-  .featured__page {
-    width: 2.75rem;
-  }
-
   .featured__details {
-    grid-template-columns: 1fr auto;
-    gap: 4rem;
-  }
-
-  .featured__buy {
-    align-items: flex-end;
-    text-align: right;
-  }
-
-  .featured__facts {
-    justify-content: flex-end;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
   }
 }
 
+/* Desktop wide conveyor layout */
 @media (width >= 64rem) {
   .featured {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
   }
 
   .featured__stage {
-    margin-top: 1.5rem;
-  }
-
-  /* Three staggered frames bleeding to the card edges, sharing a bottom edge. */
-  .featured__track {
-    height: min(32vw, 32rem, 56svh);
-    margin-right: calc(-1 * var(--gutter-right));
-    margin-left: calc(-1 * var(--gutter-left));
-    aspect-ratio: auto;
-  }
-
-  .featured__frame[data-slot="-2"] {
-    left: -18%;
-    width: 20%;
-    height: 72%;
-    opacity: 0.35;
-  }
-
-  .featured__frame[data-slot="-1"] {
-    left: 4%;
-    width: 24%;
-    height: 82%;
-    opacity: 0.65;
-    cursor: pointer;
-  }
-
-  .featured__frame[data-slot="0"] {
-    left: 31%;
-    width: 38%;
-    height: 100%;
-    opacity: 1;
-    z-index: 2;
-    box-shadow: 0 16px 48px -12px rgba(0, 0, 0, 0.65);
-  }
-
-  .featured__frame[data-slot="1"] {
-    left: 72%;
-    width: 24%;
-    height: 82%;
-    opacity: 0.65;
-    cursor: pointer;
-  }
-
-  .featured__frame[data-slot="2"] {
-    left: 98%;
-    width: 20%;
-    height: 72%;
-    opacity: 0.35;
-  }
-
-  .featured__frame:hover {
-    opacity: 1;
-  }
-
-  /* Side frames move the conveyor when clicked. */
-  .featured__frame[data-slot="-1"] .featured__frame-step,
-  .featured__frame[data-slot="1"] .featured__frame-step {
-    display: block;
-    cursor: pointer;
-  }
-
-  .featured__title {
-    position: absolute;
-    top: 7%;
-    right: 0;
-    left: 0;
-    z-index: 3;
-    margin-top: 0;
-    font-size: clamp(2.5rem, 4.5vw, 4.25rem);
-    letter-spacing: 0.02em;
-    line-height: 0.95;
-    text-align: center;
-  }
-
-  .featured__details {
     margin-top: 2.5rem;
   }
 
-  .featured__placeholder {
-    width: 30%;
-    height: min(32vw, 32rem, 56svh);
-    margin-right: auto;
-    margin-left: auto;
-    aspect-ratio: auto;
+  .featured__track {
+    height: clamp(440px, 56vh, 600px);
+  }
+
+  /* Center card: centered, width ~35vw, max-width 460px */
+  .featured__frame[data-slot="0"] {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: clamp(320px, 35vw, 460px);
+    height: 100%;
+    opacity: 1;
+    z-index: 2;
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
+  }
+
+  /* Left card peeks in */
+  .featured__frame[data-slot="-1"] {
+    left: calc(50% - (clamp(320px, 35vw, 460px) / 2) - clamp(260px, 28vw, 380px) - 2rem);
+    transform: translateY(-50%);
+    width: clamp(260px, 28vw, 380px);
+    height: 88%;
+    opacity: 0.55;
+    z-index: 1;
+  }
+
+  /* Right card peeks in */
+  .featured__frame[data-slot="1"] {
+    left: calc(50% + (clamp(320px, 35vw, 460px) / 2) + 2rem);
+    transform: translateY(-50%);
+    width: clamp(260px, 28vw, 380px);
+    height: 88%;
+    opacity: 0.55;
+    z-index: 1;
+  }
+
+  .featured__frame[data-slot="-2"] {
+    left: -20%;
+    width: 20%;
+    opacity: 0.15;
+  }
+
+  .featured__frame[data-slot="2"] {
+    left: 100%;
+    width: 20%;
+    opacity: 0.15;
+  }
+
+  .featured__title {
+    top: 22%;
+    font-size: clamp(2.75rem, 6.2vw, 5.75rem);
   }
 }
 
@@ -825,15 +811,19 @@
   justify-content: center;
   aspect-ratio: 3 / 4.4;
   padding: 30% 1rem 2rem;
-  border: 1px solid rgb(var(--color-ivory-rgb) / 0.2);
+  border: 1px solid rgb(var(--color-ivory-rgb) / 0.18);
   border-radius: 999px 999px 0 0;
   background-color: rgb(var(--color-night-rgb) / 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   text-align: center;
-  transition: background-color 0.5s;
+  transition: all 0.4s var(--ease-out-soft);
 }
 
 .service-card:hover {
-  background-color: rgb(var(--color-ivory-rgb) / 0.2);
+  background-color: rgb(var(--color-ivory-rgb) / 0.18);
+  border-color: rgb(var(--color-ivory-rgb) / 0.4);
+  transform: translateY(-4px);
 }
 
 .service-card h3 {

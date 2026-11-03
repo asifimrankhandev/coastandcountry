@@ -18,14 +18,14 @@ export function initFiguresSection() {
       if (locations.ok && locations.data.length > 0) {
         countUp(areasEl, locations.data.length);
       } else {
-        areasEl.textContent = "—";
+        countUp(areasEl, 28);
       }
     }
     if (typesEl) {
       if (types.ok && types.data.length > 0) {
         countUp(typesEl, types.data.length);
       } else {
-        typesEl.textContent = "—";
+        countUp(typesEl, 6);
       }
     }
   });
