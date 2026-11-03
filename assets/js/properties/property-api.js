@@ -5,6 +5,9 @@ import { mapApiLookupItem, mapApiProperty } from "./map-property.js";
 
 const REQUEST_TIMEOUT_MS = 8_000;
 
+/** Featured homes shown by the homepage carousel and the menu; both share one request. */
+export const FEATURED_HOMES_LIMIT = 3;
+
 /**
  * Requests made during this page view, keyed by endpoint, so the menu and the homepage
  * share one request for the same data.
@@ -73,54 +76,9 @@ const isPresent = (value) => value !== null;
 const isShowcaseReady = (property) =>
   property.isComplete && property.images.length > 0 && property.listingType === "sale";
 
-export const DEFAULT_FEATURED_PROPERTIES = [
-  {
-    id: 101,
-    reference: "CC-4102",
-    title: "Seafront Villa with Infinity Pool",
-    summary: "Commanding panoramic Mediterranean views, private landscaped gardens, and direct private cove access in Catalkoy, Girne.",
-    listingType: "sale",
-    price: { amount: 595000, currency: "GBP" },
-    bedrooms: 4,
-    internalAreaSqm: 280,
-    images: [{ id: 1, url: "./assets/images/home/villa-pool-sunloungers-1080.webp" }],
-    isComplete: true,
-    publishedAt: "2026-01-15",
-    href: "/properties",
-  },
-  {
-    id: 102,
-    reference: "CC-3215",
-    title: "Luxury Mountain View Penthouse",
-    summary: "Spacious private rooftop terrace facing the Kyrenia range with high ceilings, private pool access, and sunset balconies.",
-    listingType: "sale",
-    price: { amount: 345000, currency: "GBP" },
-    bedrooms: 3,
-    internalAreaSqm: 195,
-    images: [{ id: 2, url: "./assets/images/home/country-roof-terrace-mountains-1400.webp" }],
-    isComplete: true,
-    publishedAt: "2026-02-01",
-    href: "/properties",
-  },
-  {
-    id: 103,
-    reference: "CC-5540",
-    title: "Contemporary Residence & Gardens",
-    summary: "Architect-designed villa nestled between the foothills and the coastline with open-plan living and private gated grounds.",
-    listingType: "sale",
-    price: { amount: 720000, currency: "GBP" },
-    bedrooms: 5,
-    internalAreaSqm: 360,
-    images: [{ id: 3, url: "./assets/images/home/residence-pool-mountains-1600.webp" }],
-    isComplete: true,
-    publishedAt: "2026-02-20",
-    href: "/properties",
-  },
-];
-
 /**
  * Complete listings the agency has flagged as featured, for sale, with a photo.
- * Falls back to curated photography homes if the API is offline or slow.
+ * On failure the result is `{ ok: false, data: [] }`; callers show an honest message.
  *
  * @param {number} limit
  * @returns {Promise<ApiResult<Property[]>>}
@@ -129,15 +87,10 @@ export function getFeaturedProperties(limit) {
   return cached(
     `featured:${limit}`,
     async () => {
-      try {
-        const items = await fetchList(`/feed/1/${limit * 4}/-1`);
-        const mapped = items.map(mapApiProperty).filter(isPresent).filter(isShowcaseReady).slice(0, limit);
-        return mapped.length > 0 ? mapped : DEFAULT_FEATURED_PROPERTIES.slice(0, limit);
-      } catch (err) {
-        return DEFAULT_FEATURED_PROPERTIES.slice(0, limit);
-      }
+      const items = await fetchList(`/feed/1/${limit * 4}/-1`);
+      return items.map(mapApiProperty).filter(isPresent).filter(isShowcaseReady).slice(0, limit);
     },
-    DEFAULT_FEATURED_PROPERTIES.slice(0, limit),
+    /** @type {Property[]} */ ([]),
   );
 }
 

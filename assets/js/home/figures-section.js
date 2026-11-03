@@ -1,32 +1,32 @@
 import { countUp } from "../components/count-up.js";
 import { getPropertyLocations, getPropertyTypes } from "../properties/property-api.js";
 
+/**
+ * Animates the "at a glance" figures. Fixed business facts count up straight away; the
+ * two catalogue figures come from the live feed and keep their "—" if it is unavailable,
+ * so the page never shows a number that is not true.
+ */
 export function initFiguresSection() {
   const section = document.querySelector(".figures");
   if (!section) return;
 
-  const areasEl = section.querySelector('[data-figure="areas"]');
-  const typesEl = section.querySelector('[data-figure="types"]');
-  const regionsEl = section.querySelector('[data-figure="regions"]');
-  const phonesEl = section.querySelector('[data-figure="phones"]');
+  /** @param {string} name */
+  const figure = (name) => section.querySelector(`[data-figure="${name}"]`);
 
-  if (regionsEl) countUp(regionsEl, 3);
-  if (phonesEl) countUp(phonesEl, 2);
+  for (const name of ["regions", "phones"]) {
+    const element = figure(name);
+    const value = Number(element?.textContent);
+    if (element instanceof HTMLElement && Number.isFinite(value)) countUp(element, value);
+  }
 
   void Promise.all([getPropertyLocations(), getPropertyTypes()]).then(([locations, types]) => {
-    if (areasEl) {
-      if (locations.ok && locations.data.length > 0) {
-        countUp(areasEl, locations.data.length);
-      } else {
-        countUp(areasEl, 28);
-      }
+    const areas = figure("areas");
+    const kinds = figure("types");
+    if (areas instanceof HTMLElement && locations.ok && locations.data.length > 0) {
+      countUp(areas, locations.data.length);
     }
-    if (typesEl) {
-      if (types.ok && types.data.length > 0) {
-        countUp(typesEl, types.data.length);
-      } else {
-        countUp(typesEl, 6);
-      }
+    if (kinds instanceof HTMLElement && types.ok && types.data.length > 0) {
+      countUp(kinds, types.data.length);
     }
   });
 }

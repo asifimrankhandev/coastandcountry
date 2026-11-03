@@ -1,9 +1,6 @@
 import { createCoverImage, createElement } from "../lib/dom.js";
 import { formatPrice } from "../properties/format-property.js";
-import { getFeaturedProperties } from "../properties/property-api.js";
-
-/** Matches the homepage carousel, so both read one request. */
-const FEATURED_LIMIT = 3;
+import { FEATURED_HOMES_LIMIT, getFeaturedProperties } from "../properties/property-api.js";
 
 /**
  * Full-screen menu on the native <dialog>, which traps focus and closes on Escape.
@@ -36,7 +33,7 @@ async function renderFeaturedListing(dialog) {
   const slot = dialog.querySelector("[data-menu-featured]");
   if (!slot) return;
 
-  const { data: properties } = await getFeaturedProperties(FEATURED_LIMIT);
+  const { data: properties } = await getFeaturedProperties(FEATURED_HOMES_LIMIT);
   const [lead] = properties;
   const cover = lead?.images[0];
   if (!lead || !cover) return;

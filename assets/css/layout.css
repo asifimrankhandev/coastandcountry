@@ -36,9 +36,16 @@
 }
 
 .site-header.is-solid {
-  background-color: rgb(var(--color-night-rgb) / 0.8);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  /* Near-opaque on phones: a full-width backdrop blur re-renders on every scrolled frame. */
+  background-color: rgb(var(--color-night-rgb) / 0.94);
+}
+
+@media (width >= 64rem) and (hover: hover) {
+  .site-header.is-solid {
+    background-color: rgb(var(--color-night-rgb) / 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
 }
 
 .site-header.is-hidden {
@@ -64,9 +71,9 @@
 }
 
 .brand-logo__img {
-  height: clamp(1.75rem, 3.5vw, 2.25rem);
+  height: clamp(2.25rem, 2rem + 0.8vw, 2.75rem);
   width: auto;
-  max-width: 12rem;
+  max-width: 14rem;
   object-fit: contain;
   display: block;
 }
@@ -94,8 +101,7 @@
 }
 
 .site-header__phones a:hover,
-.icon-button:hover,
-.text-link:hover {
+.icon-button:hover {
   color: var(--color-sand);
 }
 
@@ -208,7 +214,7 @@
   height: var(--header-height);
 }
 
-.site-menu__top .wordmark {
+.site-menu__top .brand-logo {
   margin-right: auto;
 }
 

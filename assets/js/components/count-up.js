@@ -4,8 +4,8 @@ const numberFormat = new Intl.NumberFormat("en-GB");
 const DURATION_MS = 1800;
 
 /**
- * Counts `output` from zero to `value` the first time it scrolls into view. Its visually
- * hidden sibling carries the final value for screen readers.
+ * Counts `output` from zero to `value` the first time it scrolls into view. The final value
+ * is exposed as its accessible name, so screen readers never announce an in-between number.
  *
  * @param {HTMLElement} output
  * @param {number} value
@@ -14,6 +14,8 @@ export function countUp(output, value) {
   const render = (/** @type {number} */ current) => {
     output.textContent = numberFormat.format(current);
   };
+  output.setAttribute("role", "img");
+  output.setAttribute("aria-label", numberFormat.format(value));
 
   if (prefersReducedMotion()) {
     render(value);

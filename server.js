@@ -27,7 +27,15 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   // Normalize and parse URL pathname
-  let reqPath = decodeURI(req.url.split("?")[0]);
+  let reqPath;
+  try {
+    reqPath = decodeURI(req.url.split("?")[0]);
+  } catch {
+    // A malformed URL must not crash the server.
+    res.writeHead(400, { "Content-Type": "text/plain" });
+    res.end("400 Bad Request");
+    return;
+  }
   if (reqPath === "/") reqPath = "/index.html";
 
   // Prevent directory traversal attacks

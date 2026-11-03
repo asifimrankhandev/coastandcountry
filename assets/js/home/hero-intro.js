@@ -19,7 +19,8 @@ export function initHeroIntro() {
   let minElapsed = false;
   let finished = false;
 
-  const heroImg = hero.querySelector(".hero__photo img");
+  const photo = hero.querySelector(".hero__photo img");
+  const heroImg = photo instanceof HTMLImageElement ? photo : null;
 
   const finish = () => {
     if (finished) return;

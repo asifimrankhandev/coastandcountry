@@ -29,6 +29,10 @@
  * @property {number} id
  * @property {string} slug
  * @property {string} label
+ */
+
+/**
+ * A generic typedef needs its own comment block for `@template` to apply to it.
  *
  * @template T
  * @typedef {object} ApiResult

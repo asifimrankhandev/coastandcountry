@@ -211,18 +211,6 @@ em {
   display: inline-block;
 }
 
-.label--sans {
-  color: var(--color-sand);
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  font-style: normal;
-  line-height: 1.4;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  display: inline-block;
-}
-
 .display-sm,
 .display-md,
 .display-lg,
@@ -252,17 +240,22 @@ em {
   line-height: 0.9;
 }
 
-.text-secondary {
-  color: var(--color-stone);
+/* Text utilities used directly in the markup. */
+.italic {
+  font-style: italic;
 }
 
-.wordmark {
-  font-family: var(--font-display);
-  font-size: 1.0625rem;
-  line-height: 1;
-  letter-spacing: 0.04em;
+.uppercase {
   text-transform: uppercase;
-  white-space: nowrap;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+}
+
+.text-secondary {
+  color: var(--color-stone);
 }
 
 /* Rounded link button. On hover the label rolls up to a copy of itself. */
@@ -378,13 +371,11 @@ em {
 .rise-in .mask-line > span {
   animation: rise-in 0.65s var(--ease-out-soft) both;
   animation-delay: calc(var(--delay, 0ms) + var(--i, 0) * var(--step, 60ms));
-  will-change: transform;
 }
 
 .fade-in {
   animation: fade-in 0.5s var(--ease-out-soft) both;
   animation-delay: var(--delay, 0ms);
-  will-change: opacity, transform;
 }
 
 /*
@@ -402,26 +393,22 @@ em {
       opacity 0.5s var(--ease-out-soft),
       transform 0.6s var(--ease-out-soft);
     transition-delay: calc(var(--i, 0) * 50ms);
-    will-change: opacity, transform;
   }
 
   .js [data-reveal="lines"] .mask-line > span {
     transform: translateY(110%);
     transition: transform 0.65s var(--ease-out-soft);
     transition-delay: calc(var(--i, 0) * 50ms);
-    will-change: transform;
   }
 
   .js [data-reveal="image"] {
     clip-path: inset(100% 0 0 0);
     transition: clip-path 0.75s var(--ease-out-soft);
-    will-change: clip-path;
   }
 
   .js [data-reveal="image"] img {
     scale: 1.12;
     transition: scale 0.9s var(--ease-out-soft);
-    will-change: transform;
   }
 
   .js [data-reveal][data-revealed] {

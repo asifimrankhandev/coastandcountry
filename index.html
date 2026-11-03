@@ -10,10 +10,6 @@
       name="description"
       content="Find villas, apartments, and land for sale in North Cyprus with Coast &amp; Country Homes. Expert estate agents in Catalkoy &amp; Kyrenia offering guided inspection trips, legal support, and developer payment plans."
     />
-    <meta
-      name="keywords"
-      content="North Cyprus property, villas for sale North Cyprus, estate agents Kyrenia, apartments Catalkoy, Girne real estate, buy property Cyprus, Northern Cyprus homes, property investment Cyprus"
-    />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href="https://cypruscoastandcountry.com/" />
     <meta property="og:type" content="website" />
@@ -25,20 +21,19 @@
     />
     <meta property="og:url" content="https://cypruscoastandcountry.com/" />
     <meta property="og:locale" content="en_GB" />
-    <meta property="og:image" content="https://cypruscoastandcountry.com/assets/images/home/hero-homes-street-1600.webp" />
+    <meta property="og:image" content="https://cypruscoastandcountry.com/assets/images/home/hero-terrace-dusk-1600.webp" />
     <meta property="og:image:width" content="1600" />
-    <meta property="og:image:height" content="1067" />
-    <meta property="og:image:alt" content="Coast &amp; Country Homes — Exclusive properties in North Cyprus" />
+    <meta property="og:image:height" content="1054" />
+    <meta property="og:image:alt" content="A contemporary building with a lit terrace at dusk, framed by mature trees" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Coast &amp; Country Homes — Luxury Villas &amp; Property for Sale in North Cyprus" />
     <meta
       name="twitter:description"
       content="Homes between the mountains and the sea, chosen, checked and guided by a local estate agency in Catalkoy, Girne."
     />
-    <meta name="twitter:image" content="https://cypruscoastandcountry.com/assets/images/home/hero-homes-street-1600.webp" />
-    <link rel="icon" type="image/png" href="./assets/favicon.png" />
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="apple-touch-icon" href="./assets/favicon.png" />
+    <meta name="twitter:image" content="https://cypruscoastandcountry.com/assets/images/home/hero-terrace-dusk-1600.webp" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icons/favicon-32.png" />
+    <link rel="apple-touch-icon" href="./assets/icons/apple-touch-icon.png" />
 
     <!-- Self-hosted fonts (SIL Open Font License); both preloaded in the head -->
     <link
@@ -71,37 +66,17 @@
             "name": "Coast & Country Homes",
             "legalName": "Coast & Country Homes Estate Agency Ltd.",
             "url": "https://cypruscoastandcountry.com/",
-            "logo": "https://cypruscoastandcountry.com/favicon.svg",
-            "image": "https://cypruscoastandcountry.com/assets/images/home/hero-homes-street-1600.webp",
+            "logo": "https://cypruscoastandcountry.com/assets/images/brand/coast-and-country-logo.png",
+            "image": "https://cypruscoastandcountry.com/assets/images/home/hero-terrace-dusk-1600.webp",
             "description": "Independent estate agency in Catalkoy, Girne, finding apartments, villas and land along the North Cyprus coast and in its mountain villages.",
             "telephone": "+905338414910",
             "email": "info@cypruscoastandcountry.com",
-            "priceRange": "££ - ££££",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "Tasgen Karaaziz Plaza, 39 Cengiz Topel Avenue",
               "addressLocality": "Catalkoy, Girne",
               "addressRegion": "North Cyprus"
             },
-            "geo": {
-              "@type": "GeoCoordinates",
-              "latitude": 35.3315,
-              "longitude": 33.3764
-            },
-            "openingHoursSpecification": [
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
-                "closes": "18:00"
-              },
-              {
-                "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Saturday"],
-                "opens": "09:00",
-                "closes": "14:00"
-              }
-            ],
             "areaServed": [
               { "@type": "AdministrativeArea", "name": "North Cyprus" },
               { "@type": "City", "name": "Girne" },
@@ -121,20 +96,33 @@
             "url": "https://cypruscoastandcountry.com/",
             "name": "Coast & Country Homes",
             "description": "Villas, apartments and land for sale in North Cyprus",
-            "publisher": { "@id": "https://cypruscoastandcountry.com/#agent" },
-            "potentialAction": {
-              "@type": "SearchAction",
-              "target": {
-                "@type": "EntryPoint",
-                "urlTemplate": "https://cypruscoastandcountry.com/properties?query={search_term_string}"
-              },
-              "query-input": "required name=search_term_string"
-            }
+            "publisher": { "@id": "https://cypruscoastandcountry.com/#agent" }
           }
         ]
       }
     </script>
-    <script defer src="./assets/js/bundle.js"></script>
+    <!-- Enables scripted styles (reveals, loader) before first paint, so nothing flashes. -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <!-- Native ES modules; preloading flattens the import chain into one parallel fetch. -->
+    <link rel="modulepreload" href="./assets/js/main.js" />
+    <link rel="modulepreload" href="./assets/js/components/site-header.js" />
+    <link rel="modulepreload" href="./assets/js/components/site-menu.js" />
+    <link rel="modulepreload" href="./assets/js/components/scroll-reveal.js" />
+    <link rel="modulepreload" href="./assets/js/lib/dom.js" />
+    <link rel="modulepreload" href="./assets/js/properties/format-property.js" />
+    <link rel="modulepreload" href="./assets/js/properties/property-api.js" />
+    <link rel="modulepreload" href="./assets/js/properties/map-property.js" />
+    <link rel="modulepreload" href="./assets/js/config/site-config.js" />
+    <link rel="modulepreload" href="./assets/js/home.js" />
+    <link rel="modulepreload" href="./assets/js/home/hero-intro.js" />
+    <link rel="modulepreload" href="./assets/js/home/figures-section.js" />
+    <link rel="modulepreload" href="./assets/js/home/featured-carousel.js" />
+    <link rel="modulepreload" href="./assets/js/components/count-up.js" />
+    <link rel="modulepreload" href="./assets/js/lib/text.js" />
+    <script type="module" src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/home.js"></script>
   </head>
   <body>
     <a href="#main-content" class="skip-link">Skip to content</a>
@@ -143,7 +131,7 @@
     <header class="site-header">
       <div class="container site-header__bar">
         <a href="/" class="brand-logo" aria-label="Coast &amp; Country Homes — home">
-          <img src="./assets/favicon.png" alt="Coast &amp; Country Homes" class="brand-logo__img" width="150" height="29" />
+          <img src="./assets/images/brand/coast-and-country-logo.png" alt="Coast &amp; Country Homes" class="brand-logo__img" width="150" height="29" />
         </a>
 
         <ul class="site-header__phones" aria-label="Call us">
@@ -197,7 +185,7 @@
       <div class="site-menu__inner container">
         <div class="site-menu__top">
           <a href="/" class="brand-logo" aria-label="Coast &amp; Country Homes — home">
-            <img src="./assets/favicon.png" alt="Coast &amp; Country Homes" class="brand-logo__img" width="150" height="29" />
+            <img src="./assets/images/brand/coast-and-country-logo.png" alt="Coast &amp; Country Homes" class="brand-logo__img" width="150" height="29" />
           </a>
           <button type="button" class="icon-button" data-menu-close autofocus>
             Close
@@ -217,7 +205,7 @@
         <div class="hairline" aria-hidden="true"></div>
 
         <div class="site-menu__body">
-          <nav aria-label="Menu">
+          <nav class="site-menu__nav" aria-label="Menu">
             <ol class="site-menu__links">
               <li>
                 <a href="/properties" class="site-menu__link display-lg uppercase">
@@ -298,24 +286,24 @@
               <source
                 type="image/avif"
                 srcset="
-                  ./assets/images/home/hero-homes-street-800.avif   800w,
-                  ./assets/images/home/hero-homes-street-1280.avif 1280w,
-                  ./assets/images/home/hero-homes-street-1600.avif 1600w
+                  ./assets/images/home/hero-terrace-dusk-800.avif   800w,
+                  ./assets/images/home/hero-terrace-dusk-1280.avif 1280w,
+                  ./assets/images/home/hero-terrace-dusk-1600.avif 1600w
                 "
                 sizes="100vw"
               />
               <source
                 type="image/webp"
                 srcset="
-                  ./assets/images/home/hero-homes-street-800.webp   800w,
-                  ./assets/images/home/hero-homes-street-1280.webp 1280w,
-                  ./assets/images/home/hero-homes-street-1600.webp 1600w
+                  ./assets/images/home/hero-terrace-dusk-800.webp   800w,
+                  ./assets/images/home/hero-terrace-dusk-1280.webp 1280w,
+                  ./assets/images/home/hero-terrace-dusk-1600.webp 1600w
                 "
                 sizes="100vw"
               />
               <img
-                src="./assets/images/home/hero-homes-street-1600.webp"
-                alt="A row of detached family homes on a sunny street"
+                src="./assets/images/home/hero-terrace-dusk-1600.webp"
+                alt="A contemporary building with a lit terrace at dusk, framed by mature trees"
                 class="cover"
                 fetchpriority="high"
                 loading="eager"
@@ -398,7 +386,7 @@
               <p data-reveal="fade" style="--i: 1">
                 Every purchase begins with understanding how you want to live. Then we find the property, check the paperwork and arrange viewings, payment options and legal support around it.
               </p>
-              <a href="/about" class="pill pill--solid" data-reveal="fade" style="--i: 2">
+              <a href="/about" class="pill pill--outline" data-reveal="fade" style="--i: 2">
                 <span class="pill__label">
                   <span>Learn more</span>
                   <span aria-hidden="true">Learn more</span>
@@ -414,18 +402,19 @@
         <div class="slide__card figures">
           <div class="container">
             <h2 id="figures-title" class="label">(AT A GLANCE)</h2>
+            <!-- Live counts show "—" until the property feed answers, and stay so if it fails. -->
             <dl class="figures__list">
               <div class="figures__item" data-reveal="fade">
                 <dt class="figures__label">Towns and villages with homes listed</dt>
-                <dd class="figures__value"><span data-figure="areas">28</span><span class="figures__suffix">+</span></dd>
+                <dd class="figures__value"><span data-figure="areas">—</span></dd>
               </div>
               <div class="figures__item" data-reveal="fade" style="--i: 1">
                 <dt class="figures__label">Property types, from studios to land</dt>
-                <dd class="figures__value"><span data-figure="types">6</span><span class="figures__suffix">types</span></dd>
+                <dd class="figures__value"><span data-figure="types">—</span><span class="figures__suffix">types</span></dd>
               </div>
               <div class="figures__item" data-reveal="fade" style="--i: 2">
-                <dt class="figures__label">Consultation &amp; support coverage</dt>
-                <dd class="figures__value"><span>24/7</span></dd>
+                <dt class="figures__label">Direct lines, in North Cyprus and the UK</dt>
+                <dd class="figures__value"><span data-figure="phones">2</span><span class="figures__suffix">lines</span></dd>
               </div>
               <div class="figures__item" data-reveal="fade" style="--i: 3">
                 <dt class="figures__label">Key regions, from Kyrenia to Famagusta</dt>
@@ -439,11 +428,41 @@
       <!-- 4. Featured Homes Carousel Section -->
       <section class="slide" aria-labelledby="featured-title" aria-roledescription="carousel">
         <div class="slide__card featured">
-          <div class="container" data-featured-carousel>
+          <!--
+            The carousel's full structure is here from the start, with a fixed track height and
+            reserved space for the details, so filling it in never shifts the page.
+          -->
+          <div class="container featured__carousel" data-featured-carousel>
             <div class="featured__head">
-              <h2 id="featured-title" class="label">(FEATURED HOMES)</h2>
+              <h2 id="featured-title" class="label">(Featured homes)</h2>
+              <div class="featured__controls" data-carousel-controls hidden>
+                <div class="featured__pagination" data-carousel-pagination></div>
+                <div class="featured__arrows">
+                  <button type="button" class="featured__arrow-btn" aria-label="Previous home" data-carousel-prev>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m15 18-6-6 6-6" />
+                    </svg>
+                  </button>
+                  <button type="button" class="featured__arrow-btn" aria-label="Next home" data-carousel-next>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="m9 18 6-6-6-6" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
-            <div class="featured__placeholder"></div>
+
+            <div class="featured__stage">
+              <div class="featured__track is-loading" data-carousel-track>
+                <div class="featured__strip" data-carousel-strip></div>
+                <div class="featured__status" role="status" data-carousel-status>
+                  <p>Loading featured homes…</p>
+                </div>
+              </div>
+              <p class="featured__title display-md rise-in" aria-hidden="true" data-carousel-title></p>
+            </div>
+
+            <div class="featured__details-container" aria-live="polite" data-carousel-details></div>
           </div>
         </div>
       </section>
@@ -491,7 +510,7 @@
               <p class="text-secondary">
                 Harbour towns, quiet villages under the Kyrenia range and long sandy beaches to the east. We know each area well and will tell you honestly which one suits the life you have in mind.
               </p>
-              <a href="/areas" class="pill pill--solid">
+              <a href="/areas" class="pill pill--outline">
                 <span class="pill__label">
                   <span>Explore the areas</span>
                   <span aria-hidden="true">Explore the areas</span>
@@ -602,7 +621,7 @@
                 <p class="text-secondary">
                   Tell us what you are looking for and when you can travel. We shortlist the homes, plan the viewings across the regions and stay with you from the first visit to the final decision.
                 </p>
-                <a href="/buying/inspection-trip" class="pill pill--solid">
+                <a href="/buying/inspection-trip" class="pill pill--outline">
                   <span class="pill__label">
                     <span>Plan a trip</span>
                     <span aria-hidden="true">Plan a trip</span>
