@@ -385,7 +385,7 @@ em {
 }
 
 /*
- * Scroll entrances, played once when scroll-reveal.js marks an element `data-revealed`.
+ * Scroll entrances, played each time scroll-reveal.js marks an element `data-revealed`.
  * - fade:  rises and fades in
  * - lines: each `.mask-line > span` slides up out of its own mask
  * - image: the frame wipes open from the bottom while the photo settles
