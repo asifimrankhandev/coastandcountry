@@ -101,9 +101,24 @@
         ]
       }
     </script>
-    <!-- Enables scripted styles (reveals, loader) before first paint, so nothing flashes. -->
+    <!--
+      Enables scripted styles (reveals, loader) before first paint, so nothing flashes. If the
+      modules never start (blocked, failed, or the page was opened as a local file), the class is
+      dropped again so the page still shows all of its content.
+    -->
     <script>
-      document.documentElement.classList.add("js");
+      (() => {
+        const root = document.documentElement;
+        const SCRIPTS_START_MS = 5000;
+        const fallBack = () => {
+          if (!root.dataset.scriptsReady) root.classList.remove("js");
+        };
+        root.classList.add("js");
+        addEventListener("error", (event) => {
+          if (event.target instanceof HTMLScriptElement) fallBack();
+        }, true);
+        setTimeout(fallBack, SCRIPTS_START_MS);
+      })();
     </script>
     <!-- Native ES modules; preloading flattens the import chain into one parallel fetch. -->
     <link rel="modulepreload" href="./assets/js/main.js" />
@@ -483,7 +498,14 @@
               <div class="featured__track is-loading" data-carousel-track>
                 <div class="featured__strip" data-carousel-strip></div>
                 <div class="featured__status" role="status" data-carousel-status>
-                  <p>Loading featured homes…</p>
+                  <p class="js-only">Loading featured homes…</p>
+                  <p class="no-js-only">See every home we have for sale on the properties page.</p>
+                  <a class="pill pill--outline no-js-only" href="/properties">
+                    <span class="pill__label">
+                      <span>Browse all properties</span>
+                      <span aria-hidden="true">Browse all properties</span>
+                    </span>
+                  </a>
                 </div>
               </div>
               <p class="featured__title display-md rise-in" aria-hidden="true" data-carousel-title></p>

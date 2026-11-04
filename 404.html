@@ -28,9 +28,24 @@
     <link rel="stylesheet" href="./assets/css/base.css" />
     <link rel="stylesheet" href="./assets/css/layout.css" />
 
-    <!-- Enables scripted styles (reveals, loader) before first paint, so nothing flashes. -->
+    <!--
+      Enables scripted styles (reveals, loader) before first paint, so nothing flashes. If the
+      modules never start (blocked, failed, or the page was opened as a local file), the class is
+      dropped again so the page still shows all of its content.
+    -->
     <script>
-      document.documentElement.classList.add("js");
+      (() => {
+        const root = document.documentElement;
+        const SCRIPTS_START_MS = 5000;
+        const fallBack = () => {
+          if (!root.dataset.scriptsReady) root.classList.remove("js");
+        };
+        root.classList.add("js");
+        addEventListener("error", (event) => {
+          if (event.target instanceof HTMLScriptElement) fallBack();
+        }, true);
+        setTimeout(fallBack, SCRIPTS_START_MS);
+      })();
     </script>
     <!-- Native ES modules; preloading flattens the import chain into one parallel fetch. -->
     <link rel="modulepreload" href="./assets/js/main.js" />

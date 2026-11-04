@@ -198,6 +198,12 @@ em {
   white-space: nowrap;
 }
 
+/* Content for when scripts run, and its replacement for when they don't. */
+:root:not(.js) .js-only,
+.js .no-js-only {
+  display: none;
+}
+
 /* Section kicker introducing a section, e.g. "(ABOUT)", "(OUR PROJECTS)". */
 .label {
   color: var(--color-ivory);

@@ -490,7 +490,7 @@
   cursor: grabbing;
 }
 
-.featured__track.is-loading {
+.js .featured__track.is-loading {
   border-radius: var(--radius-card);
   background-color: var(--color-night-raised);
   animation: pulse 2s ease-in-out infinite;
